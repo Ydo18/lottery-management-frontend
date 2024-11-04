@@ -33,7 +33,7 @@ export default {
                 const response = await login(this.username, this.password);
                 console.log("Login successful:", response);
                 localStorage.setItem('authToken', response.access_token); // Almacenar el token en localStorage
-                window.location.href = "/results"; // Redirigir a LotteryResults
+                window.location.href = "/home"; // Redirigir a Home
             } catch (error) {
                 this.errorMessage = "Login failed. Please check your credentials.";
             }

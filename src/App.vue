@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
     <component :is="currentComponent" />
   </div>
 </template>
@@ -24,7 +23,7 @@ export default {
   },
   created() {
     const path = window.location.pathname;
-    if (path === '/results') {
+    if (path === '/home') {
       this.currentComponent = 'ConfigParameters';
     }
   }

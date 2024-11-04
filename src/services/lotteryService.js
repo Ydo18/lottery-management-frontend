@@ -25,7 +25,7 @@ axiosInstance.interceptors.request.use(
 // Funciones para consumir los endpoints
 export const getLotteryResults = async () => {
     try {
-        const response = await axiosInstance.get("/results");
+        const response = await axiosInstance.get("/generate-image");
         return response.data;
     } catch (error) {
         console.error("Error fetching lottery results:", error);
@@ -43,22 +43,27 @@ export const getParameters = async () => {
     }
 };
 
-export const getActiveImages = async () => {
+export const updateParameters = async (params) => {
     try {
-        const response = await axiosInstance.get("/images");
+        const response = await axiosInstance.post("/update-parameters", params);
         return response.data;
     } catch (error) {
-        console.error("Error fetching images:", error);
+        console.error("Error updating parameters:", error);
         throw error;
     }
 };
 
-export const getUserByUsername = async (username) => {
+export const uploadImage = async (formData) => {
     try {
-        const response = await axiosInstance.get(`/user/${username}`);
+        const response = await axiosInstance.post("/images/upload", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        console.log(response);
         return response.data;
     } catch (error) {
-        console.error("Error fetching user:", error);
+        console.error("Error uploading image:", error.response ? error.response.data : error.message);
         throw error;
     }
 };
