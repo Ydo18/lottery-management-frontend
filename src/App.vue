@@ -1,15 +1,32 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <img alt="Vue logo" src="./assets/logo.png">
+    <component :is="currentComponent" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import LoginLottery from './components/LoginLottery.vue';
+import LotteryResults from './components/LotteryResults.vue';
+import ConfigParameters from './components/ConfigParameters.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    LoginLottery,
+    LotteryResults,
+    ConfigParameters
+  },
+  data() {
+    return {
+      currentComponent: 'LoginLottery'
+    };
+  },
+  created() {
+    const path = window.location.pathname;
+    if (path === '/results') {
+      this.currentComponent = 'ConfigParameters';
+    }
   }
 }
 </script>
